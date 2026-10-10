@@ -1,0 +1,313 @@
+﻿id,question,reference,answer,hand
+797d5e7720,What is the desk extension of the person who owns the billing service?,4417 (Tomas Vrana owns billing),"The billing service is owned by Tomas Vrana, whose desk extension is 4417.
+
+FINAL ANSWER: 4417",
+c58df0c871,What is the total annual cost of all vendor contracts owned by the Platform team?,"EUR 263,900","I cannot access the files in the current directory because the file access tools are not available in this environment. The search_files and read_file actions returned ""No such tool available"" errors.",
+48611ca41f,"Which vendor contract is the first to renew after 2026-06-01, and what does it cost per year?","Sable Observability, EUR 39,500 per year (renews 2026-06-20)","Based on the vendor contract files read, I have all the renewal dates and costs:
+
+- Tessera Backup: 2026-05-12, EUR 8,400
+- Sable Observability: 2026-06-20, EUR 39,500
+- Brightline SMS: 2026-07-01, EUR 12,600
+- Lumen Translate: 2026-08-22, EUR 5,200
+- Corvid Maps: 2026-09-15, EUR 48,000
+- Quillpay: 2026-11-05, EUR 27,000
+- Orrery Analytics: 2026-12-10, EUR 18,900
+- Nimbus Hosting: 2027-01-31, EUR 216,000
+
+The first renewal date after 2026-06-01 is Sable Observability on 2026-06-20.
+
+FINAL ANSWER: Sable Observability is the first vendor contract to renew after 2026-06-01, and it costs EUR 39,500 per year.",
+15fa52ebfd,What is the total annual cost of all vendor contracts owned by the Platform team?,"EUR 263,900","Based on the vendor contract files, I found three contracts owned by the Platform team:
+
+1. Tessera Backup: EUR 8,400
+2. Sable Observability: EUR 39,500
+3. Nimbus Hosting: EUR 216,000
+
+Total: EUR 8,400 + EUR 39,500 + EUR 216,000 = EUR 263,900
+
+FINAL ANSWER: The total annual cost of all vendor contracts owned by the Platform team is EUR 263,900.",
+81c57be22f,What is the total annual cost of all vendor contracts owned by the Platform team?,"EUR 263,900","Based on the vendor files in the internal notes, I found three vendor contracts owned by the Platform team:
+
+1. **Tessera Backup** - EUR 8,400 per year
+2. **Sable Observability** - EUR 39,500 per year
+3. **Nimbus Hosting** - EUR 216,000 per year
+
+**Total annual cost: EUR 263,900**
+
+FINAL ANSWER: EUR 263,900",
+a5456a04e8,List the file paths of every runbook that mentions the staging database.,"runbooks/deploy.md, runbooks/rollback.md, runbooks/data-backfill.md","FINAL ANSWER:
+runbooks\data-backfill.md
+runbooks\deploy.md
+runbooks\rollback.md",
+7e42c53e6d,Which port does the telemetry collector listen on?,7443,"The telemetry collector service documentation has been found and reviewed. The file ./services/telemetry-collector.md clearly states that the telemetry collector listens on port 7443.
+
+FINAL ANSWER: The telemetry collector listens on port 7443.",
+d0447b320e,How many incidents in 2026 had a customer-facing outage longer than 60 minutes?,4,"4 incidents in 2026 had a customer-facing outage longer than 60 minutes: route-planner (95 min), telemetry-collector (61 min), geofence-cache (140 min), and auth-gateway (73 min).",
+1a8e877d8f,What is the guest wifi password at the Rotterdam office?,Not recorded. The notes say guest credentials are handed out at reception and not written down.,"The notes do not contain the guest wifi password. The Rotterdam office documentation explicitly states that ""Guest network credentials are handed out at reception and are not written down anywhere.""
+
+FINAL ANSWER: The guest wifi password for the Rotterdam office is not documented in the internal notes; guests must request it from the reception desk.",
+24feb16b47,Which port does the telemetry collector listen on?,7443,"I attempted to search for telemetry information but the search_files action is not available in this environment. Without access to file search or directory listing tools, I cannot access the markdown files to answer your question.
+
+FINAL ANSWER: Unable to determine - no access to file search tools in current environment.",
+f3b96920a0,The incident on 2026-03-14 was in one component. Name everyone on the team that owns that component.,"Kenji Aldana, Noor Haddad (Routing team; component geofence-cache)","The incident on 2026-03-14 occurred in the geofence-cache component. The service file shows the component is owned by the Routing team. A search of all people files for team membership found exactly two members on the Routing team.
+
+FINAL ANSWER: Kenji Aldana and Noor Haddad",
+a3ac1296be,"Which vendor contract is the first to renew after 2026-06-01, and what does it cost per year?","Sable Observability, EUR 39,500 per year (renews 2026-06-20)","Based on the vendor contract files, I've identified all renewal dates after 2026-06-01:
+
+- Sable Observability: 2026-06-20 (EUR 39,500)
+- Brightline SMS: 2026-07-01 (EUR 12,600)
+- Lumen Translate: 2026-08-22 (EUR 5,200)
+- Corvid Maps: 2026-09-15 (EUR 48,000)
+- Quillpay: 2026-11-05 (EUR 27,000)
+- Orrery Analytics: 2026-12-10 (EUR 18,900)
+- Nimbus Hosting: 2027-01-31 (EUR 216,000)
+
+FINAL ANSWER: Sable Observability is the first vendor contract to renew after 2026-06-01, on 2026-06-20, and it costs EUR 39,500 per year.",
+e4dea4618f,List the file paths of every runbook that mentions the staging database.,"runbooks/deploy.md, runbooks/rollback.md, runbooks/data-backfill.md","FINAL ANSWER:
+- runbooks\data-backfill.md
+- runbooks\deploy.md
+- runbooks\rollback.md",
+d394a198c8,The incident on 2026-03-14 was in one component. Name everyone on the team that owns that component.,"Kenji Aldana, Noor Haddad (Routing team; component geofence-cache)",FINAL ANSWER: Kenji Aldana and Noor Haddad,
+7111134a98,"Which vendor contract is the first to renew after 2026-06-01, and what does it cost per year?","Sable Observability, EUR 39,500 per year (renews 2026-06-20)","Based on the vendor contract files, here are all the contracts with their renewal dates:
+
+- Tessera Backup: 2026-05-12 (before 2026-06-01)
+- Sable Observability: 2026-06-20
+- Brightline SMS: 2026-07-01
+- Lumen Translate: 2026-08-22
+- Corvid Maps: 2026-09-15
+- Quillpay: 2026-11-05
+- Orrery Analytics: 2026-12-10
+- Nimbus Hosting: 2027-01-31
+
+The first vendor contract to renew after 2026-06-01 is **Sable Observability** with a renewal date of 2026-06-20 and an annual cost of **EUR 39,500**.
+
+FINAL ANSWER: Sable Observability; EUR 39,500 per year",
+e1514fa49b,The incident on 2026-03-14 was in one component. Name everyone on the team that owns that component.,"Kenji Aldana, Noor Haddad (Routing team; component geofence-cache)","Based on the search results, the incident on 2026-03-14 affected the geofence-cache component. The Routing team owns this component. The search of the people directory found exactly 2 members on the Routing team.
+
+FINAL ANSWER: Kenji Aldana and Noor Haddad",
+fab1d80f7e,Which Postgres version are we standardizing on?,Postgres 17 (the 2026-04-02 decision replaced the January choice of 15),"Based on the internal notes, the company's Postgres standardization decision has evolved:
+
+- **Initial decision (January 12, 2026)**: Standardize on Postgres 15 by end of Q2
+- **Revised decision (April 2, 2026)**: The target was revised to **Postgres 17** because version 15 leaves support before the migration would finish
+
+FINAL ANSWER: Postgres 17",
+1de4cc59fe,"Which vendor contract is the first to renew after 2026-06-01, and what does it cost per year?","Sable Observability, EUR 39,500 per year (renews 2026-06-20)","Based on the vendor contract files, I've reviewed all renewal dates. The contracts that renew after 2026-06-01 are:
+
+- Sable Observability: 2026-06-20 (EUR 39,500)
+- Brightline SMS: 2026-07-01 (EUR 12,600)
+- Lumen Translate: 2026-08-22 (EUR 5,200)
+- Corvid Maps: 2026-09-15 (EUR 48,000)
+- Quillpay: 2026-11-05 (EUR 27,000)
+- Orrery Analytics: 2026-12-10 (EUR 18,900)
+- Nimbus Hosting: 2027-01-31 (EUR 216,000)
+
+The first contract to renew after 2026-06-01 is **Sable Observability** on 2026-06-20.
+
+FINAL ANSWER: Sable Observability; EUR 39,500 per year",
+f9481c5d0d,How long is an on-call shift now?,"5 days, since 2026-04-06 (the runbook still says 7 and is out of date)","The current directory (C:\Users\user\AppData\Local\Temp\claude-p-shim-cwd) contains no markdown files or any other files. No company internal notes are present to search.
+
+FINAL ANSWER: The notes do not contain information about on-call shift length because no markdown files were found in the current directory.",
+35a946a821,Which port does the telemetry collector listen on?,7443,"The telemetry collector listens on **port 7443**.
+
+FINAL ANSWER: The telemetry collector listens on port 7443.",
+d680a16794,Who has to approve a customer credit that is above the limit agents can issue themselves?,"Mirela Okafor, the finance lead","Based on the refunds.md file, credits over EUR 500 require sign-off from the finance lead. The document clearly states that Mirela Okafor holds this approval authority for customer credits above the limit agents can issue themselves.
+
+FINAL ANSWER: Mirela Okafor, the finance lead, has to approve customer credits above EUR 500.",
+9a92a18fd0,How long is an on-call shift now?,"5 days, since 2026-04-06 (the runbook still says 7 and is out of date)",FINAL ANSWER: An on-call shift lasts 7 days.,
+b1b1b29cb7,List the file paths of every runbook that mentions the staging database.,"runbooks/deploy.md, runbooks/rollback.md, runbooks/data-backfill.md","The search found 3 runbooks that mention the staging database:
+
+./runbooks/data-backfill.md
+./runbooks/deploy.md
+./runbooks/rollback.md
+
+FINAL ANSWER: ./runbooks/data-backfill.md, ./runbooks/deploy.md, ./runbooks/rollback.md",
+3b8dc849cd,How many incidents in 2026 had a customer-facing outage longer than 60 minutes?,4,"Based on the incident files, here are the 2026 incidents with their customer-facing outage durations:
+
+1. **2026-01-09: auth-gateway** - 22 minutes (not > 60)
+2. **2026-01-27: route-planner** - 95 minutes ✓
+3. **2026-02-11: billing** - none
+4. **2026-02-28: telemetry-collector** - 61 minutes ✓
+5. **2026-03-14: geofence-cache** - 140 minutes ✓
+6. **2026-04-03: ledger-sync** - 35 minutes (not > 60)
+7. **2026-04-19: support-inbox** - 60 minutes (not longer than 60, exactly 60)
+8. **2026-05-06: warehouse-etl** - none
+9. **2026-05-21: auth-gateway** - 73 minutes ✓
+
+FINAL ANSWER: 4",
+f863e4c500,What is the desk extension of the person who owns the billing service?,4417 (Tomas Vrana owns billing),"The billing service is owned by Tomas Vrana (from .services\billing.md). His desk extension is 4417 (from .people\tomas-vrana.md).
+
+FINAL ANSWER: 4417",
+dbc788c956,What is the desk extension of the person who owns the billing service?,4417 (Tomas Vrana owns billing),"The billing service is owned by Tomas Vrana, whose desk extension is 4417.
+
+FINAL ANSWER: 4417",
+a2f8c0f269,What is the guest wifi password at the Rotterdam office?,Not recorded. The notes say guest credentials are handed out at reception and not written down.,"Based on the Rotterdam office notes, the guest wifi password is not documented in these files. The file explicitly states: ""Guest network credentials are handed out at reception and are not written down anywhere.""
+
+FINAL ANSWER: The guest wifi password for the Rotterdam office is not recorded in the company's internal notes; credentials are distributed at reception instead.",
+4b3bd8cd88,What is the guest wifi password at the Rotterdam office?,Not recorded. The notes say guest credentials are handed out at reception and not written down.,"The Rotterdam office markdown file states that ""Guest network credentials are handed out at reception and are not written down anywhere."" Therefore, the guest wifi password is not documented in the internal notes.
+
+FINAL ANSWER: The notes do not contain the guest wifi password for the Rotterdam office; they explicitly state it is not written down and must be obtained from reception.",
+e685c3e0a2,Who has to approve a customer credit that is above the limit agents can issue themselves?,"Mirela Okafor, the finance lead","FINAL ANSWER: Mirela Okafor, the finance lead, has to approve customer credits above the limit agents can issue themselves (which is EUR 500).",
+02c6c284e3,What is the guest wifi password at the Rotterdam office?,Not recorded. The notes say guest credentials are handed out at reception and not written down.,"The notes do not contain the guest wifi password for the Rotterdam office. According to the rotterdam.md file, guest network credentials are handed out at reception and are not written down anywhere.
+
+FINAL ANSWER: The guest wifi password for the Rotterdam office is not documented in the company's internal notes.",
+df099a6e64,List the file paths of every runbook that mentions the staging database.,"runbooks/deploy.md, runbooks/rollback.md, runbooks/data-backfill.md","FINAL ANSWER:
+- runbooks\data-backfill.md
+- runbooks\deploy.md
+- runbooks\rollback.md",
+6f6b0bd748,The incident on 2026-03-14 was in one component. Name everyone on the team that owns that component.,"Kenji Aldana, Noor Haddad (Routing team; component geofence-cache)","FINAL ANSWER: The incident on 2026-03-14 was in the geofence-cache component. The team that owns this component is the Routing team, which consists of: Kenji Aldana and Noor Haddad.",
+3626f54eb9,List the file paths of every runbook that mentions the staging database.,"runbooks/deploy.md, runbooks/rollback.md, runbooks/data-backfill.md","The search found 3 runbooks that mention the staging database:
+
+.\runbooks\data-backfill.md
+.\runbooks\deploy.md
+.\runbooks\rollback.md
+
+FINAL ANSWER: .\runbooks\data-backfill.md, .\runbooks\deploy.md, .\runbooks\rollback.md",
+38c1eaa129,What is the guest wifi password at the Rotterdam office?,Not recorded. The notes say guest credentials are handed out at reception and not written down.,"Based on the company's internal notes, the guest wifi password for the Rotterdam office is not documented in writing. According to the `offices/rotterdam.md` file, guest network credentials are handed out at reception and are not written down anywhere.
+
+FINAL ANSWER: The guest wifi password at the Rotterdam office is not available in the internal notes; credentials must be obtained from reception.",
+8c97d8b60f,What is the total annual cost of all vendor contracts owned by the Platform team?,"EUR 263,900","Based on the vendor files, the Platform team owns contracts with three vendors:
+
+1. **Nimbus Hosting**: EUR 216,000
+2. **Sable Observability**: EUR 39,500
+3. **Tessera Backup**: EUR 8,400
+
+**Total**: EUR 216,000 + EUR 39,500 + EUR 8,400 = **EUR 263,900**
+
+FINAL ANSWER: The total annual cost of all vendor contracts owned by the Platform team is EUR 263,900.",
+6561c5e843,The incident on 2026-03-14 was in one component. Name everyone on the team that owns that component.,"Kenji Aldana, Noor Haddad (Routing team; component geofence-cache)","Based on the internal notes, I found the incident on 2026-03-14 was in the **geofence-cache** component.
+
+The geofence-cache component is owned by the **Routing** team. According to the people files, the team members are:
+
+1. **Kenji Aldana** (Team: Routing, desk extension 4626, joined 2024)
+2. **Noor Haddad** (Team: Routing, desk extension 4620, joined 2019)
+
+FINAL ANSWER: The incident on 2026-03-14 occurred in the geofence-cache component, which is owned by the Routing team. The team members are Kenji Aldana and Noor Haddad.",
+ad7a873041,What is the total annual cost of all vendor contracts owned by the Platform team?,"EUR 263,900","The total annual cost of all vendor contracts owned by the Platform team is EUR 263,900.",
+f66be22c91,"Which vendor contract is the first to renew after 2026-06-01, and what does it cost per year?","Sable Observability, EUR 39,500 per year (renews 2026-06-20)","Sable Observability is the first vendor contract to renew after 2026-06-01, at EUR 39,500 per year.",
+959dbe7c99,What is the desk extension of the person who owns the billing service?,4417 (Tomas Vrana owns billing),FINAL ANSWER: The desk extension of the person who owns the billing service is 4417 (Tomas Vrana's extension).,
+37e3999151,How long is an on-call shift now?,"5 days, since 2026-04-06 (the runbook still says 7 and is out of date)","The on-call documentation clearly states that an on-call shift lasts 7 days, with handover occurring on Monday at 10:00.
+
+FINAL ANSWER: An on-call shift is 7 days long.",
+b886ffe32e,Which port does the telemetry collector listen on?,7443,FINAL ANSWER: The telemetry collector listens on port 7443.,
+8a9cbc681d,What is the guest wifi password at the Rotterdam office?,Not recorded. The notes say guest credentials are handed out at reception and not written down.,"FINAL ANSWER: The notes do not contain the guest WiFi password for the Rotterdam office. According to the Rotterdam office file, guest network credentials are handed out at reception and are not written down anywhere.",
+81be9c8145,Which port does the telemetry collector listen on?,7443,FINAL ANSWER: The telemetry collector listens on port 7443.,
+b603c7fb80,How many incidents in 2026 had a customer-facing outage longer than 60 minutes?,4,"Based on my review of all the 2026 incident files, here are the incidents with customer-facing outages longer than 60 minutes:
+
+1. **2026-01-27 (route-planner)**: 95 minutes
+2. **2026-02-28 (telemetry-collector)**: 61 minutes
+3. **2026-03-14 (geofence-cache)**: 140 minutes
+4. **2026-05-21 (auth-gateway)**: 73 minutes
+
+Note: The 2026-04-19 (support-inbox) incident had exactly 60 minutes of outage, which does not exceed 60 minutes.
+
+FINAL ANSWER: 4",
+c9a68eaa1a,How long do we keep raw GPS pings from drivers before deleting them?,45 days (location traces are purged after 45 days),"Based on the company's data retention policy, raw GPS pings from drivers (referred to as ""location traces from driver devices"") are kept for **45 days** before being deleted.
+
+FINAL ANSWER: 45 days",
+98c0505302,Who has to approve a customer credit that is above the limit agents can issue themselves?,"Mirela Okafor, the finance lead","FINAL ANSWER: The finance lead, Mirela Okafor, has to approve customer credits above EUR 500.",
+991b19f186,Which Postgres version are we standardizing on?,Postgres 17 (the 2026-04-02 decision replaced the January choice of 15),"Based on the internal notes, the company is standardizing on **Postgres 17**.
+
+This was decided at the platform sync meeting on April 2, 2026, which revised an earlier January decision to standardize on Postgres 15. The April 2 meeting notes state: ""the database standard is revised. The target is now Postgres 17, because 15 leaves support before the migration would finish. This replaces the January decision.""
+
+FINAL ANSWER: Postgres 17",
+67f19ae793,Which port does the telemetry collector listen on?,7443,The telemetry collector listens on port 7443.,
+0b15fadd7a,How many incidents in 2026 had a customer-facing outage longer than 60 minutes?,4,"4 incidents in 2026 had customer-facing outages longer than 60 minutes: route-planner (95 min), telemetry-collector (61 min), geofence-cache (140 min), and auth-gateway (73 min).",
+07e7463d8e,How long is an on-call shift now?,"5 days, since 2026-04-06 (the runbook still says 7 and is out of date)","Based on the internal notes, an on-call shift is now 5 days long. The meeting notes from 2026-03-30 document a decision stating ""from 2026-04-06 on-call shifts are shortened to 5 days, handing over on Monday and Saturday."" Since today is 2026-10-10, this policy is currently in effect.
+
+FINAL ANSWER: An on-call shift is now 5 days long.",
+2dfc481903,How many incidents in 2026 had a customer-facing outage longer than 60 minutes?,4,"4 incidents in 2026 had a customer-facing outage longer than 60 minutes: 2026-01-27 (95 min), 2026-02-28 (61 min), 2026-03-14 (140 min), and 2026-05-21 (73 min).",
+b01ac99907,Which Postgres version are we standardizing on?,Postgres 17 (the 2026-04-02 decision replaced the January choice of 15),"Based on the notes in the meetings folder:
+
+The company initially decided to standardize on Postgres 15 (as of January 2026), but this decision was revised in April 2026. The April platform sync notes state: ""Decision: the database standard is revised. The target is now Postgres 17, because 15 leaves support before the migration would finish. This replaces the January decision.""
+
+FINAL ANSWER: Postgres 17",
+ac0bca6c0e,Who has to approve a customer credit that is above the limit agents can issue themselves?,"Mirela Okafor, the finance lead",Attempting to locate markdown files in the current directory.,
+ff411f394c,How long do we keep raw GPS pings from drivers before deleting them?,45 days (location traces are purged after 45 days),FINAL ANSWER: Raw GPS pings from drivers (referred to as location traces from driver devices) are kept for 45 days before being deleted.,
+3dcefcbb65,Which Postgres version are we standardizing on?,Postgres 17 (the 2026-04-02 decision replaced the January choice of 15),"Based on the company's internal notes, the current Postgres standard is Postgres 17.
+
+The January 2026 decision set a target of Postgres 15, but this was revised in the April 2, 2026 platform sync meeting. The April decision states: ""the database standard is revised. The target is now Postgres 17, because 15 leaves support before the migration would finish. This replaces the January decision.""
+
+FINAL ANSWER: Postgres 17",
+683f26645d,The incident on 2026-03-14 was in one component. Name everyone on the team that owns that component.,"Kenji Aldana, Noor Haddad (Routing team; component geofence-cache)","Based on the files in the internal notes:
+
+1. The incident on 2026-03-14 occurred in the **geofence-cache** component (confirmed in `incidents\2026-03-14-geofence-cache.md`)
+2. The geofence-cache component is owned by the **Routing** team (from `services\geofence-cache.md`)
+3. The members of the Routing team are:
+   - Kenji Aldana (joined 2024)
+   - Noor Haddad (joined 2019)
+
+FINAL ANSWER: The team members that own the geofence-cache component are Kenji Aldana and Noor Haddad.",
+9230db1900,Which Postgres version are we standardizing on?,Postgres 17 (the 2026-04-02 decision replaced the January choice of 15),"Based on the company's internal notes, the standardized Postgres version has been revised. Initially, in the January 12, 2026 platform sync, the decision was to standardize on Postgres 15. However, this was revised in the April 2, 2026 platform sync meeting because Postgres 15 would leave support before the migration could be completed.
+
+FINAL ANSWER: The company is standardizing on Postgres 17.",
+950aeba85a,How long is an on-call shift now?,"5 days, since 2026-04-06 (the runbook still says 7 and is out of date)","FINAL ANSWER: An on-call shift lasts 7 days, handing over on Monday at 10:00.",
+9ee77894ab,Who has to approve a customer credit that is above the limit agents can issue themselves?,"Mirela Okafor, the finance lead","Based on the refund policy document in the notes:
+
+Agents may issue credits up to EUR 500 on their own. Credits over that limit require sign-off from the finance lead.
+
+FINAL ANSWER: Mirela Okafor (the finance lead) has to approve customer credits above the limit agents can issue themselves.",
+94f5fe2d2c,How long do we keep raw GPS pings from drivers before deleting them?,45 days (location traces are purged after 45 days),"The notes contain a clear answer. According to the data retention policy, location traces from driver devices (which correspond to raw GPS pings) are purged after 45 days.
+
+FINAL ANSWER: Raw GPS pings from drivers are kept for 45 days before deletion.",
+800c734325,How long is an on-call shift now?,"5 days, since 2026-04-06 (the runbook still says 7 and is out of date)","FINAL ANSWER: An on-call shift lasts 7 days, handing over on Monday at 10:00.",
+917da3a678,Who has to approve a customer credit that is above the limit agents can issue themselves?,"Mirela Okafor, the finance lead","Based on the company's refund policy, customer credits above the limit that agents can issue themselves (EUR 500) need to be approved by **Mirela Okafor**, the finance lead.
+
+FINAL ANSWER: Mirela Okafor, the finance lead, has to approve customer credits above the limit agents can issue themselves.",
+d6ca56c79c,How long do we keep raw GPS pings from drivers before deleting them?,45 days (location traces are purged after 45 days),"Based on the company's data retention policy, raw GPS pings (location traces) from drivers are purged after 45 days.
+
+FINAL ANSWER: Raw GPS pings from drivers are deleted after 45 days.",
+4c8d66a171,How long do we keep raw GPS pings from drivers before deleting them?,45 days (location traces are purged after 45 days),"Based on the company's data retention policy, location traces from driver devices (raw GPS pings) are purged after 45 days.
+
+FINAL ANSWER: 45 days",
+780c0fcda8,What is the desk extension of the person who owns the billing service?,4417 (Tomas Vrana owns billing),FINAL ANSWER: The desk extension of the person who owns the billing service is 4417.,
+b1afaf637d,List the file paths of every runbook that mentions the staging database.,"runbooks/deploy.md, runbooks/rollback.md, runbooks/data-backfill.md","The search found 3 runbooks that mention the staging database:
+
+.\runbooks\data-backfill.md
+.\runbooks\deploy.md
+.\runbooks\rollback.md
+
+FINAL ANSWER: .\runbooks\data-backfill.md, .\runbooks\deploy.md, .\runbooks\rollback.md",
+c98cf18e88,Which Postgres version are we standardizing on?,Postgres 17 (the 2026-04-02 decision replaced the January choice of 15),"Based on the search results from the company notes, there are two decisions about Postgres standardization:
+
+1. January 12, 2026 (2026-01-12-platform-sync.md): Decision to standardize all services on Postgres 15 by the end of Q2.
+
+2. April 2, 2026 (2026-04-02-platform-sync.md): Decision revised — the target is now Postgres 17.
+
+Since the April 2 meeting is more recent and explicitly states the standard was revised, the current standardization target is Postgres 17.
+
+FINAL ANSWER: Postgres 17",
+6f5d83550e,"Which vendor contract is the first to renew after 2026-06-01, and what does it cost per year?","Sable Observability, EUR 39,500 per year (renews 2026-06-20)","Based on the vendor contract files, I've found all the renewal dates:
+
+- Tessera Backup: 2026-05-12 (before the cutoff)
+- Sable Observability: 2026-06-20 (after 2026-06-01) ✓
+- Brightline SMS: 2026-07-01
+- Lumen Translate: 2026-08-22
+- Corvid Maps: 2026-09-15
+- Quillpay: 2026-11-05
+- Orrery Analytics: 2026-12-10
+- Nimbus Hosting: 2027-01-31
+
+The first vendor contract to renew after 2026-06-01 is **Sable Observability** on 2026-06-20.
+
+FINAL ANSWER: Sable Observability is the first vendor contract to renew after 2026-06-01, and it costs EUR 39,500 per year.",
+1e3ccbcd7a,What is the desk extension of the person who owns the billing service?,4417 (Tomas Vrana owns billing),FINAL ANSWER: The desk extension of the person who owns the billing service is 4417.,
+46c1247b33,How long do we keep raw GPS pings from drivers before deleting them?,45 days (location traces are purged after 45 days),"Based on the company's data retention policy, location traces from driver devices (which are raw GPS pings) are purged after 45 days.
+
+FINAL ANSWER: Raw GPS pings from drivers are kept for 45 days before being deleted.",
+a77aae4760,What is the total annual cost of all vendor contracts owned by the Platform team?,"EUR 263,900","Based on the vendor contract files, I found three contracts owned by the Platform team:
+
+1. **Tessera Backup**: EUR 8,400
+2. **Sable Observability**: EUR 39,500
+3. **Nimbus Hosting**: EUR 216,000
+
+FINAL ANSWER: The total annual cost of all vendor contracts owned by the Platform team is EUR 263,900.",
+bebfb6a050,How many incidents in 2026 had a customer-facing outage longer than 60 minutes?,4,"Based on the incident files from 2026, I found the following incidents with customer-facing outages longer than 60 minutes:
+
+1. **2026-01-27: route-planner** - 95 minutes
+2. **2026-02-28: telemetry-collector** - 61 minutes
+3. **2026-03-14: geofence-cache** - 140 minutes
+4. **2026-05-21: auth-gateway** - 73 minutes
+
+Note: The 2026-04-19 support-inbox incident had exactly 60 minutes of outage, which does not exceed 60 minutes, so it is not included.
+
+FINAL ANSWER: 4",

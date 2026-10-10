@@ -76,6 +76,20 @@ def main():
         lo, hi = wilson(k, len(g))
         L.append(f"| {arm} | {len(g)} | {k}/{len(g)} = {k / len(g):.0%} | {lo:.0%} to {hi:.0%} | {sum(x['prog'] for x in g)}/{len(g)} |")
 
+    # Runs a human has traced to the backend rather than to the harness (annotations.json, by run
+    # id). They stay in every headline number above; this table shows what is left without them.
+    ann_path = d / "annotations.json"
+    ann = json.loads(ann_path.read_text(encoding="utf-8")) if ann_path.exists() else {}
+    if ann:
+        L += ["", f"### Excluding {len(ann)} runs annotated as backend artifacts", "",
+              "| Arm | Runs | Judge correct | Wilson 95% (runs) |", "|---|---|---|---|"]
+        for arm in arms:
+            g = [x for x in usable if x["arm"] == arm and x["run"] not in ann]
+            k = sum(x["judge"] for x in g)
+            lo, hi = wilson(k, len(g))
+            L.append(f"| {arm} | {len(g)} | {k}/{len(g)} = {k / len(g):.0%} | {lo:.0%} to {hi:.0%} |")
+        L += ["", "Annotated runs:"] + [f"- `{k}`: {v}" for k, v in ann.items()]
+
     by_task = defaultdict(lambda: defaultdict(list))
     for x in usable:
         by_task[x["task"]][x["arm"]].append(x["judge"])

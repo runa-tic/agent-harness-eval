@@ -1,0 +1,66 @@
+{"key": "477b1d3e065d6dd332c2", "judge": 1, "reason": "The final conclusion states port 7443, matching the reference answer exactly.", "judge_model": "claude-sonnet-5-5"}
+{"key": "4786708bc6e730444b03", "judge": 1, "reason": "The answer states port 7443, matching the reference answer exactly with no hedging.", "judge_model": "claude-sonnet-5-5"}
+{"key": "676640677cd4b587eaa6", "judge": 1, "reason": "The answer states raw GPS pings are deleted after 45 days, matching the reference exactly.", "judge_model": "claude-sonnet-5-5"}
+{"key": "acdafd99f0ce988c3e60", "judge": 1, "reason": "The answer states 45 days for raw GPS pings/location traces, matching the reference exactly.", "judge_model": "claude-sonnet-5-5"}
+{"key": "9ddb8e549bf91cef95ab", "judge": 1, "reason": "The answer names Mirela Okafor, the finance lead, as approver, matching the reference exactly.", "judge_model": "claude-sonnet-5-5"}
+{"key": "c11e7ef0ea4d47d020fd", "judge": 1, "reason": "The answer names Mirela Okafor, the finance lead, as approver, matching the reference; the extra EUR 500 detail is harmless.", "judge_model": "claude-sonnet-5-5"}
+{"key": "71d9d2e2f18e4847aca2", "judge": 1, "reason": "The answer states extension 4417, matching the reference value for the billing service owner.", "judge_model": "claude-sonnet-5-5"}
+{"key": "6141c5adfea234aa50fd", "judge": 1, "reason": "Answer names Sable Observability at EUR 39,500 per year, matching the reference vendor and cost.", "judge_model": "claude-sonnet-5-5"}
+{"key": "adefba2d57cd93c4c11f", "judge": 1, "reason": "Identifies Sable Observability (renews 2026-06-20) with EUR 39,500 per year, matching the reference answer.", "judge_model": "claude-sonnet-5-5"}
+{"key": "9783bd6985608cd0c511", "judge": 1, "reason": "Names Kenji Aldana and Noor Haddad as Routing team owners of geofence-cache, matching the reference.", "judge_model": "claude-sonnet-5-5"}
+{"key": "25f668025f16d1b21ed3", "judge": 1, "reason": "Answer names geofence-cache, Routing team, and both members Kenji Aldana and Noor Haddad, matching the reference.", "judge_model": "claude-sonnet-5-5"}
+{"key": "4f2f819e790dd086c39c", "judge": 1, "reason": "Final conclusion is Postgres 17, matching the reference, and correctly notes the April decision superseded January's choice of 15.", "judge_model": "claude-sonnet-5-5"}
+{"key": "b17dabf0afe6a386d57e", "judge": 1, "reason": "The answer concludes Postgres 17, matching the reference, and correctly notes the April 2 revision of the January choice of 15.", "judge_model": "claude-sonnet-5-5"}
+{"key": "17c3c7d44cf2f4572f2e", "judge": 1, "reason": "States on-call shift is now 5 days, effective 2026-04-06, matching the reference; extra detail is consistent.", "judge_model": "claude-sonnet-5-5"}
+{"key": "7ffbe5666c347b2ff1c0", "judge": 0, "reason": "The answer says 7 days, which is the outdated runbook value; the correct current length is 5 days.", "judge_model": "claude-sonnet-5-5"}
+{"key": "8f719649d4e96395b7a0", "judge": 1, "reason": "The answer concludes 4 incidents, matching the reference, and lists four consistent incidents each over 60 minutes.", "judge_model": "claude-sonnet-5-5"}
+{"key": "0643d5d6606d3250d6a7", "judge": 1, "reason": "The answer's final conclusion is 4, matching the reference; its listed incidents over 60 minutes (95, 61, 140, 73) also total four.", "judge_model": "claude-sonnet-5-5"}
+{"key": "581baf5d31a7e1ed5ee9", "judge": 1, "reason": "The answer states EUR 263,900, exactly matching the reference total.", "judge_model": "claude-sonnet-5-5"}
+{"key": "65eab8c2fccb266d73f7", "judge": 1, "reason": "Final answer EUR 263,900 matches the reference; the three listed amounts also sum to that figure.", "judge_model": "claude-sonnet-5-5"}
+{"key": "8e8ad8a7a9808d39db37", "judge": 1, "reason": "The answer concludes the password isn't recorded and is obtained from reception, matching the reference exactly.", "judge_model": "claude-sonnet-5-5"}
+{"key": "01857c10526b79cf7b53", "judge": 1, "reason": "Answer says password isn't documented and guests get credentials at reception, matching the reference.", "judge_model": "claude-sonnet-5-5"}
+{"key": "db98f73cdfda46b1a789", "judge": 1, "reason": "Answer lists the same three runbooks (deploy, rollback, data-backfill); the \"./\" prefix and ordering differences are immaterial.", "judge_model": "claude-sonnet-5-5"}
+{"key": "d16b87ea012109bce584", "judge": 1, "reason": "Lists the same three runbook files as the reference; only difference is Windows backslash separators and ordering, which don't change the facts.", "judge_model": "claude-sonnet-5-5"}
+{"key": "b78d9fb4a5998ad8ff06", "judge": 0, "reason": "The answer states it could not determine the port and never gives 7443.", "judge_model": "claude-sonnet-5-5"}
+{"key": "87142deacaff122f12fe", "judge": 1, "reason": "The answer states port 7443, which matches the reference answer exactly.", "judge_model": "claude-sonnet-5-5"}
+{"key": "a2c28bb0151248c83cbf", "judge": 1, "reason": "The answer concludes raw GPS pings are kept 45 days before deletion, matching the reference.", "judge_model": "claude-sonnet-5-5"}
+{"key": "a6ae36432249a0a57fb6", "judge": 1, "reason": "The answer concludes 45 days, matching the reference that location traces are purged after 45 days.", "judge_model": "claude-sonnet-5-5"}
+{"key": "a7fbe65eb7e364f729eb", "judge": 1, "reason": "The answer names Mirela Okafor, the finance lead, as approver, matching the reference; the EUR 500 detail is extra.", "judge_model": "claude-sonnet-5-5"}
+{"key": "8893580c2ae7c1ba4f7f", "judge": 1, "reason": "Names Mirela Okafor, the finance lead, matching the reference; the added EUR 500 limit is extra detail.", "judge_model": "claude-sonnet-5-5"}
+{"key": "0426005c7e4ee47c2398", "judge": 1, "reason": "The answer identifies Tomas Vrana as billing owner and gives extension 4417, matching the reference.", "judge_model": "claude-sonnet-5-5"}
+{"key": "dbb536fea21c1b5141bb", "judge": 1, "reason": "The answer identifies Tomas Vrana as billing owner and gives extension 4417, matching the reference.", "judge_model": "claude-sonnet-5-5"}
+{"key": "6ddd793bb31a136b50e6", "judge": 1, "reason": "Answer identifies Sable Observability, EUR 39,500 per year, renewing 2026-06-20, matching the reference exactly.", "judge_model": "claude-sonnet-5-5"}
+{"key": "b6136b0ad53d5f2bf380", "judge": 1, "reason": "Answer identifies Sable Observability at EUR 39,500 per year, matching the reference exactly.", "judge_model": "claude-sonnet-5-5"}
+{"key": "73ba535cda747bc65470", "judge": 1, "reason": "Answer names Kenji Aldana and Noor Haddad, matching the reference team members exactly.", "judge_model": "claude-sonnet-5-5"}
+{"key": "096a16bf0ec55c3c7b07", "judge": 1, "reason": "Final conclusion names Kenji Aldana and Noor Haddad as owners of geofence-cache (Routing team), matching the reference.", "judge_model": "claude-sonnet-5-5"}
+{"key": "f67051f6cc74a4d2a413", "judge": 1, "reason": "The final answer is Postgres 17, matching the reference, and it correctly notes the April decision replaced January's choice of 15.", "judge_model": "claude-sonnet-5-5"}
+{"key": "f5e0f120d324159a1add", "judge": 1, "reason": "The answer concludes Postgres 17 and notes the April 2 decision replaced the January choice of 15, matching the reference.", "judge_model": "claude-sonnet-5-5"}
+{"key": "273c928e7fb32dff528c", "judge": 0, "reason": "The answer found no notes and gave no shift length; it never states the correct 5 days.", "judge_model": "claude-sonnet-5-5"}
+{"key": "1c8e50f06c22fc1e6a58", "judge": 0, "reason": "Answer says 7 days, which is the outdated runbook value; the current shift length is 5 days since 2026-04-06.", "judge_model": "claude-sonnet-5-5"}
+{"key": "503880c0d1cf8fe46d20", "judge": 1, "reason": "The answer concludes 4 incidents, matching the reference, and lists four outages each longer than 60 minutes.", "judge_model": "claude-sonnet-5-5"}
+{"key": "9b45b05ddb413229136d", "judge": 1, "reason": "The answer concludes 4 incidents, matching the reference, and correctly excludes the exactly-60-minute incident.", "judge_model": "claude-sonnet-5-5"}
+{"key": "e3e647d1d55460368194", "judge": 0, "reason": "The answer gives no total cost; it only says file access failed, never stating EUR 263,900.", "judge_model": "claude-sonnet-5-5"}
+{"key": "54304600aff9cbd9e860", "judge": 1, "reason": "The answer's total of EUR 263,900 matches the reference, and the itemized amounts sum correctly (8,400+39,500+216,000).", "judge_model": "claude-sonnet-5-5"}
+{"key": "351ea5bb723e2b6c3413", "judge": 1, "reason": "Answer states the password isn't documented and that credentials are handed out at reception, matching the reference.", "judge_model": "claude-sonnet-5-5"}
+{"key": "e5d92ae48c55fd9dd312", "judge": 1, "reason": "Answer states the password isn't recorded and that credentials are handed out at reception, matching the reference.", "judge_model": "claude-sonnet-5-5"}
+{"key": "441189b4e309c1bff5d2", "judge": 1, "reason": "Answer lists the same three runbooks (deploy, rollback, data-backfill); only difference is Windows path formatting and ordering.", "judge_model": "claude-sonnet-5-5"}
+{"key": "36165faab9232c5031c4", "judge": 1, "reason": "Lists the same three runbooks as the reference; only differences are backslash path separators and ordering, which don't change the fact.", "judge_model": "claude-sonnet-5-5"}
+{"key": "89ac472846612d1f5443", "judge": 1, "reason": "The answer states port 7443, matching the reference exactly, with no hedging or contradictory values.", "judge_model": "claude-sonnet-5-5"}
+{"key": "be9529c847b91458144d", "judge": 1, "reason": "The answer states raw GPS pings are kept 45 days before deletion, matching the reference.", "judge_model": "claude-sonnet-5-5"}
+{"key": "1222c8eb6e577eaab661", "judge": 1, "reason": "The answer states 45 days, matching the reference for deletion of raw GPS location traces.", "judge_model": "claude-sonnet-5-5"}
+{"key": "aceae6cd94af6d122f01", "judge": 0, "reason": "The answer only states an attempt to locate files and never names Mirela Okafor or any approver.", "judge_model": "claude-sonnet-5-5"}
+{"key": "e121393afe9e46418cf1", "judge": 1, "reason": "Answer names Mirela Okafor, the finance lead, as approver, matching the reference; the EUR 500 detail is extra.", "judge_model": "claude-sonnet-5-5"}
+{"key": "4b0da4ece6fe6e0c3c0d", "judge": 1, "reason": "The answer states extension 4417 for Tomas Vrana, matching the reference exactly.", "judge_model": "claude-sonnet-5-5"}
+{"key": "9ec958d610bad420f427", "judge": 1, "reason": "The answer identifies Sable Observability at EUR 39,500 per year, renewing 2026-06-20, matching the reference exactly.", "judge_model": "claude-sonnet-5-5"}
+{"key": "19d09f87600f117cf7e5", "judge": 1, "reason": "The answer identifies Sable Observability at EUR 39,500 per year, matching the reference (renews 2026-06-20).", "judge_model": "claude-sonnet-5-5"}
+{"key": "794bb930b74aaf54d2b3", "judge": 1, "reason": "Answer names Kenji Aldana and Noor Haddad as Routing team owners of geofence-cache, matching the reference.", "judge_model": "claude-sonnet-5-5"}
+{"key": "8aca34b909d40af5538e", "judge": 1, "reason": "Answer names Kenji Aldana and Noor Haddad as Routing team owners of geofence-cache, matching the reference.", "judge_model": "claude-sonnet-5-5"}
+{"key": "09dbd00cf097d9226037", "judge": 1, "reason": "Final answer is Postgres 17, matching the reference, and correctly notes it replaced January's choice of 15.", "judge_model": "claude-sonnet-5-5"}
+{"key": "6bae369dcc76d969fb97", "judge": 1, "reason": "Final conclusion is Postgres 17, matching the reference, and correctly notes the April revision superseding January's choice of 15.", "judge_model": "claude-sonnet-5-5"}
+{"key": "9ebd68596505b8e5b02b", "judge": 0, "reason": "Answer says 7 days (outdated runbook value); the current shift length is 5 days since 2026-04-06.", "judge_model": "claude-sonnet-5-5"}
+{"key": "af7859c93b18f5c8d95d", "judge": 1, "reason": "The answer's final count of 4 matches the reference, and the listed incidents are consistent with it.", "judge_model": "claude-sonnet-5-5"}
+{"key": "12728e4398a022606ce3", "judge": 1, "reason": "The answer's final conclusion is 4, matching the reference answer, with a consistent list of four incidents.", "judge_model": "claude-sonnet-5-5"}
+{"key": "e3f111467541660b7543", "judge": 1, "reason": "The answer's total of EUR 263,900 matches the reference, and the component sum (8,400 + 39,500 + 216,000) is arithmetically correct.", "judge_model": "claude-sonnet-5-5"}
+{"key": "2d42c8aeb5deaddc17f8", "judge": 1, "reason": "The answer's total of EUR 263,900 matches the reference, and the component sum (216,000 + 39,500 + 8,400) is arithmetically correct.", "judge_model": "claude-sonnet-5-5"}
+{"key": "4fe63229f312565f81fa", "judge": 1, "reason": "Answer states the password is not recorded and credentials are given out at reception, matching the reference.", "judge_model": "claude-sonnet-5-5"}
+{"key": "b283151ff2e52f31be59", "judge": 1, "reason": "The answer states the password isn't recorded and that credentials are obtained from reception, matching the reference.", "judge_model": "claude-sonnet-5-5"}

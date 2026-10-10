@@ -1,0 +1,6 @@
+{
+  "hermes:R1:2": "backend artifact: model tried to call search_files as a native function inside the CLI, got 'not available', and gave up; Hermes never received a tool call",
+  "hermes:A2:2": "backend artifact: same; reply cites 'No such tool available' errors that come from the CLI behind the shim, not from Hermes",
+  "hermes:T2:2": "backend artifact: model searched the shim's own working directory (claude-p-shim-cwd), which the CLI told it was the cwd, instead of the corpus",
+  "hermes:R3:3": "backend artifact: reply ended after a one-line preamble with no tool call, so Hermes treated it as the final answer"
+}
