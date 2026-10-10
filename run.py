@@ -206,6 +206,13 @@ def main():
         for line in runs.read_text(encoding="utf-8").splitlines():
             r = json.loads(line)
             done.add((r["arm"], r["task"], r["rep"]))
+    # Freeze the task list next to the runs: grading must use the questions and gold answers the
+    # runs were actually given, even after tasks.json moves on.
+    snap = out_dir / "tasks.json"
+    all_tasks = (ROOT / "tasks.json").read_text(encoding="utf-8")
+    if snap.exists() and done and snap.read_text(encoding="utf-8") != all_tasks:
+        raise SystemExit(f"ABORT: {snap} differs from tasks.json and this label already has runs; use a new --label")
+    snap.write_text(all_tasks, encoding="utf-8")
     (out_dir / "meta.json").write_text(json.dumps({
         "model": a.model, "max_turns": a.max_turns, "reps": a.reps, "arms": a.arms,
         "hermes_backend": a.hermes_base_url or "api.anthropic.com", "prompt": PROMPT}, indent=2), encoding="utf-8")

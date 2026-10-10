@@ -3,4 +3,4 @@
 Component: auth-gateway
 Customer-facing outage: 22 minutes.
 Root cause: an expired signing certificate.
-Detected by: customer report
+Detected by: on-call engineer

@@ -2,7 +2,8 @@
 
 Owner: Kenji Aldana
 Owning team: Routing
-Listens on port 8080.
-Tier: 3
+Listens on port 6001.
+Tier: 2
+Depends on: telemetry-collector
 
-Dependencies are listed in the service catalogue.
+Formerly named fence-store; renamed on 2026-01-05. Older notes use the old name.

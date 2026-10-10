@@ -73,7 +73,8 @@ def main():
     ap.add_argument("--judge-model", default="claude-sonnet-5-5")
     a = ap.parse_args()
     d = ROOT / "results" / a.label
-    tasks = {t["id"]: t for t in json.loads((ROOT / "tasks.json").read_text(encoding="utf-8"))}
+    tpath = d / "tasks.json" if (d / "tasks.json").exists() else ROOT / "tasks.json"
+    tasks = {t["id"]: t for t in json.loads(tpath.read_text(encoding="utf-8"))}
     runs = [json.loads(l) for l in (d / "runs.jsonl").read_text(encoding="utf-8").splitlines()]
     gpath = d / "grades.jsonl"
     cache = {}

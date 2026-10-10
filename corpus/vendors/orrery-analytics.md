@@ -2,6 +2,7 @@
 
 Provides: BI dashboards
 Contract owner: Data team
+Contract contact: Rui Castellan
 Annual cost: EUR 18,900
 Renewal date: 2026-12-10
-Notice period: 60 days
+Notice period: 60 days before the renewal date

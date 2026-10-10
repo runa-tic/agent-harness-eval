@@ -103,6 +103,16 @@ def main():
     for t in sorted(by_task, key=lambda t: [g["task"] for g in graded].index(t)):
         L.append(f"| {t} | {kinds[t]} | " + " | ".join(f"{sum(by_task[t][arm])}/{len(by_task[t][arm])}" for arm in arms) + " |")
 
+    # Task kinds grouped by their first word, so "temporal-chain" and "temporal-reverted" share a row.
+    fam = defaultdict(lambda: defaultdict(list))
+    for x in usable:
+        fam[x["kind"].split("-")[0]][x["arm"]].append(x["judge"])
+    L += ["", "## By kind of task", "", "| Kind | Tasks | " + " | ".join(arms) + " |", "|---|---|" + "---|" * len(arms)]
+    for k in sorted(fam):
+        n_tasks = len({x["task"] for x in usable if x["kind"].split("-")[0] == k})
+        L.append(f"| {k} | {n_tasks} | " + " | ".join(
+            f"{sum(fam[k][arm])}/{len(fam[k][arm])}" if fam[k][arm] else "n/a" for arm in arms) + " |")
+
     L += ["", "## Run-to-run consistency", ""]
     for arm in arms:
         same = sum(1 for t in by_task if len(set(by_task[t][arm])) == 1)

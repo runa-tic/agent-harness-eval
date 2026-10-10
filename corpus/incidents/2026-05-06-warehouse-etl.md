@@ -3,4 +3,4 @@
 Component: warehouse-etl
 Customer-facing outage: none.
 Root cause: a late upstream export; internal dashboards only.
-Detected by: alert
+Detected by: on-call engineer

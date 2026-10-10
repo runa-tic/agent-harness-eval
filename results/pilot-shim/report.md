@@ -41,6 +41,17 @@ Difference in per-task success, claude minus hermes: **+5.6%** (95% bootstrap ov
 | U1 | unanswerable | 3/3 | 3/3 |
 | L1 | listing | 3/3 | 3/3 |
 
+## By kind of task
+
+| Kind | Tasks | claude | hermes |
+|---|---|---|---|
+| aggregation | 2 | 6/6 | 5/6 |
+| listing | 1 | 3/3 | 3/3 |
+| multi | 3 | 9/9 | 9/9 |
+| single | 3 | 9/9 | 7/9 |
+| temporal | 2 | 3/6 | 4/6 |
+| unanswerable | 1 | 3/3 | 3/3 |
+
 ## Run-to-run consistency
 
 - **claude:** 12 of 12 tasks gave the same verdict on every repeat.

@@ -1,5 +1,0 @@
-# Map accuracy
-
-Raised by Stellan Mbeki on 2026-03-20. Port, retention and renewal questions came up but
-nothing was decided; see the owning team's own pages for the actual figures.
-Follow-up in 6 weeks.

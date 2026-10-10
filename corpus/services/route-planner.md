@@ -2,7 +2,6 @@
 
 Owner: Noor Haddad
 Owning team: Routing
-Listens on port 9100.
-Tier: 2
-
-Dependencies are listed in the service catalogue.
+Listens on port 8080.
+Tier: 1
+Depends on: geofence-cache

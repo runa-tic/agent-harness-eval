@@ -3,4 +3,4 @@
 Component: telemetry-collector
 Customer-facing outage: 61 minutes.
 Root cause: disk exhaustion on the ingest node.
-Detected by: on-call engineer
+Detected by: customer report

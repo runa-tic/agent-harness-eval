@@ -1,0 +1,116 @@
+[
+  {
+    "id": "R1",
+    "kind": "single-hop",
+    "q": "Which port does the telemetry collector listen on?",
+    "gold": "7443",
+    "must": [
+      "\\b7443\\b"
+    ]
+  },
+  {
+    "id": "R2",
+    "kind": "single-hop-paraphrase",
+    "q": "How long do we keep raw GPS pings from drivers before deleting them?",
+    "gold": "45 days (location traces are purged after 45 days)",
+    "must": [
+      "\\b45\\b"
+    ]
+  },
+  {
+    "id": "R3",
+    "kind": "single-hop",
+    "q": "Who has to approve a customer credit that is above the limit agents can issue themselves?",
+    "gold": "Mirela Okafor, the finance lead",
+    "must": [
+      "Mirela\\s+Okafor"
+    ]
+  },
+  {
+    "id": "M1",
+    "kind": "multi-hop",
+    "q": "What is the desk extension of the person who owns the billing service?",
+    "gold": "4417 (Tomas Vrana owns billing)",
+    "must": [
+      "\\b4417\\b"
+    ]
+  },
+  {
+    "id": "M2",
+    "kind": "multi-hop-scan",
+    "q": "Which vendor contract is the first to renew after 2026-06-01, and what does it cost per year?",
+    "gold": "Sable Observability, EUR 39,500 per year (renews 2026-06-20)",
+    "must": [
+      "Sable",
+      "39[,. ]?500"
+    ]
+  },
+  {
+    "id": "M3",
+    "kind": "multi-hop",
+    "q": "The incident on 2026-03-14 was in one component. Name everyone on the team that owns that component.",
+    "gold": "Kenji Aldana, Noor Haddad (Routing team; component geofence-cache)",
+    "must": [
+      "Aldana",
+      "Haddad"
+    ]
+  },
+  {
+    "id": "T1",
+    "kind": "temporal",
+    "q": "Which Postgres version are we standardizing on?",
+    "gold": "Postgres 17 (the 2026-04-02 decision replaced the January choice of 15)",
+    "must": [
+      "\\b17\\b"
+    ]
+  },
+  {
+    "id": "T2",
+    "kind": "temporal",
+    "q": "How long is an on-call shift now?",
+    "gold": "5 days, since 2026-04-06 (the runbook still says 7 and is out of date)",
+    "must": [
+      "\\b(5|five)\\b"
+    ]
+  },
+  {
+    "id": "A1",
+    "kind": "aggregation",
+    "q": "How many incidents in 2026 had a customer-facing outage longer than 60 minutes?",
+    "gold": "4",
+    "must": [
+      "\\b4\\b|\\bfour\\b"
+    ]
+  },
+  {
+    "id": "A2",
+    "kind": "aggregation",
+    "q": "What is the total annual cost of all vendor contracts owned by the Platform team?",
+    "gold": "EUR 263,900",
+    "must": [
+      "263[,. ]?900"
+    ]
+  },
+  {
+    "id": "U1",
+    "kind": "unanswerable",
+    "q": "What is the guest wifi password at the Rotterdam office?",
+    "gold": "Not recorded. The notes say guest credentials are handed out at reception and not written down.",
+    "must": [
+      "reception|not (written|recorded|documented|available|in the notes)|no password|isn't|is not"
+    ],
+    "trap": "password (is|:)\\s*`?saudade"
+  },
+  {
+    "id": "L1",
+    "kind": "listing",
+    "q": "List the file paths of every runbook that mentions the staging database.",
+    "gold": "runbooks/deploy.md, runbooks/rollback.md, runbooks/data-backfill.md",
+    "must": [
+      "deploy\\.md",
+      "rollback\\.md",
+      "data-backfill\\.md"
+    ],
+    "trap": "on-call\\.md|certificate-rotation\\.md|incident-comms\\.md"
+  }
+]
