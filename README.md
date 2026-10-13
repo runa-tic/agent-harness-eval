@@ -5,8 +5,68 @@ Claude Code run headless. The question it asks is narrow: with the model, the pr
 files held fixed, does the harness around the model change how often a notes-lookup task is
 answered correctly, how consistently, and at what cost per run?
 
-Status: task set v2 (50 tasks) built and audited; the head-to-head on v2 has not been run yet.
-The v1 pilot (12 tasks, 3 repeats per arm) is in `results/pilot-shim/`.
+## Result
+
+On 50 tasks with 3 repeats per arm (300 runs, `claude-haiku-4-5` on both sides, real provider
+API), the two harnesses are not distinguishable on accuracy.
+
+| Arm | Judge correct | Wilson 95% (runs) | Tasks with the same verdict on all 3 repeats | Median wall time | Median tool calls |
+|---|---|---|---|---|---|
+| Claude Code | 135/150 = 90% | 84% to 94% | 46 of 50 | 16 s | 4 |
+| Hermes Agent | 134/150 = 89% | 83% to 93% | 44 of 50 | 43 s | 6 |
+
+Difference in per-task success, Claude Code minus Hermes: **+0.7 points** (95% bootstrap over
+tasks: -6.7 to +7.3). With 50 tasks the interval is about 7 points either side, so a real gap
+smaller than that would not show up here. The full tables are in
+[`results/v2-api/report.md`](results/v2-api/report.md).
+
+The equal totals hide different failures. What the traces show:
+
+1. **37 tasks are solved 3/3 by both arms, 2 are failed 0/3 by both, and 11 differ.** On five of
+   the 11 the majority verdict flips: Hermes wins T2 (stale runbook), D2 (renamed service) and U6
+   (rota that stops before the date asked); Claude Code wins T3 (a chain of three changes) and C2
+   (two pages that disagree with no precedence rule). The other six are single-repeat misses, five
+   of them on the Hermes side, which is where its lower consistency comes from.
+2. **The first move differs, and it decides T2.** Claude Code opened with a file listing in 142 of
+   150 runs and ran no content search at all in 69. Hermes opened with `search_files` in all 150.
+   On T2 Claude Code listed the files, read `runbooks/on-call.md`, and answered from it in two
+   tool calls, three times out of three. Hermes searched the contents for "on-call", which also
+   returned the meeting note that overrides the runbook, and was right three times out of three.
+   Searching first is not a general advantage: on T3 Hermes read the policy page and stopped in
+   two of three runs, while Claude Code read the later notes every time.
+3. **The two shared failures look like the model, not the harness.** On T6 (ownership handed over
+   on a person's page) and C1 (a catalogue that states it is authoritative) both arms read the
+   service page and stopped, 0/3 each. In the gold audit, the same Claude Code harness with a
+   larger model answered both correctly.
+4. **The harnesses behave differently at the turn limit.** Both were capped at 20 turns. Hermes
+   reached the cap in 4 runs, exited with code 1, and still returned a final answer in all four;
+   three were correct. Claude Code reached it in 2 runs and returned an empty result both times.
+   Those two empty results are the whole of Claude Code's deficit on U6, so part of what this
+   eval scores as accuracy is a budget policy.
+5. **Hermes is slower here, and about half of that is tool execution.** Its tool calls took a
+   median 3.7 s per search and 2.3 s per file read, 49% of wall time in the median run, plus about
+   4 s outside the agent loop. The runs were made on Windows, so this is a measurement of this
+   setup and not of Hermes in general.
+6. **Cost per run is about the same.** Claude Code reported a median of $0.024 per run ($4.59 for
+   150). Hermes reports token counts but no price; at list prices its runs come to a median of
+   $0.019 to $0.023 ($4.07 to $5.35 in total), depending on which cache-write rate applies.
+7. **Neither arm obeyed text addressed to an AI reader.** J1 and J2 were 6/6 on both.
+
+### How far to trust the grading
+
+The LLM judge (a different, larger model, blind to the arm) and the programmatic check agree on
+295 of 300 runs, Cohen's kappa 0.91. The five disagreements:
+
+- Three R3 answers name "the finance lead" without the person's name. The check requires the
+  name; the judge accepted the role. Two are Hermes runs, one is Claude Code.
+- `claude:L4:2` lists the three correct people and is marked wrong by the judge, whose own
+  explanation starts to retract the verdict. This looks like a judge error against Claude Code.
+- `hermes:C2:3` mentions both figures but commits to one. The check passed it; the judge did not.
+
+Scoring those five the strict way gives 135/150 and 132/150, which is inside the same interval.
+**Human labels are not in yet**: `results/v2-api/hand_labels.csv` is a blind, shuffled sheet of
+all 300 answers, and `stats.py` reports judge-versus-human kappa once it is filled. Until then
+the judge is checked only against the programmatic grader.
 
 ## Design
 
@@ -20,6 +80,8 @@ The v1 pilot (12 tasks, 3 repeats per arm) is in `results/pilot-shim/`.
 - **Same class of tools.** Hermes: its `file` toolset (`read_file`, `search_files`, `write_file`,
   `patch`). Claude Code: `Read`, `Grep`, `Glob`. The tasks are read-only. Each harness keeps its
   own shipped system prompt; that is part of what is being compared.
+- **Same turn limit.** 20 turns on both arms. A turn may contain several tool calls, so a run can
+  make more than 20 calls.
 - **Synthetic corpus.** `corpus_gen.py` builds 94 markdown notes (175 KB) for an invented company
   from fixed tables and one seed. Nothing in it is answerable from training data. Gold answers are
   computed from the same tables that write the notes, and the generator asserts the properties the
@@ -49,12 +111,26 @@ The v1 pilot (12 tasks, 3 repeats per arm) is in `results/pilot-shim/`.
 | Arithmetic | K1-K4 | Dates, units, which interval a date falls in |
 | Planted instructions | J1, J2 | Obeys text in a file that is addressed to an AI reader |
 
+## Runs in this repo
+
+| Label | What it is |
+|---|---|
+| `results/v2-api` | The result above: 50 tasks, 3 repeats, both arms, provider API |
+| `results/v2-audit-sonnet` | Gold audit: Claude Code arm with a larger model, one repeat. 49/50 by the judge, 50/50 by the programmatic check |
+| `results/v2-calib-haiku` | Difficulty check before the head-to-head: Claude Code arm, one repeat, 45/50 |
+| `results/v2-smoke-api` | One task, one repeat per arm, to prove the provider API path before the full run |
+| `results/pilot-shim` | v1 pilot, 12 tasks, Hermes behind a local translation layer. A pipeline check only; see Known limits |
+
+The raw traces in `runs.jsonl` are as the harnesses emitted them, except that the local account
+name in file paths, session and message identifiers, and thinking signatures have been replaced.
+
 ## Run it
 
 ```
 python corpus_gen.py                      # corpus/ and tasks.json
 python run.py --label pilot --reps 3      # results/pilot/runs.jsonl (resumable)
 python judge.py --label pilot             # grades + hand_labels.csv
+python label.py --label pilot             # optional: fill hand_labels.csv in the terminal
 python stats.py --label pilot             # report.md
 ```
 
@@ -68,7 +144,16 @@ the provider API directly.
 - **Fifty tasks, written by one person.** The task-level interval on the arm difference is still
   wide, and the mix of task families is a choice, not a sample of real work. Per-family numbers
   rest on two to seven tasks each.
-- **One corpus, one domain, read-only.** Two long files, but no code, terminal or write tasks.
+- **Three repeats per task.** Enough to see that a task is unstable, not enough to estimate how
+  unstable. The trace observations in the Result section describe what happened in these runs.
+- **One model, one corpus, one domain, read-only.** A small model on notes lookup. Two long files,
+  but no code, terminal or write tasks, which is most of what either harness is built for.
+- **The turn limit is part of the score.** The two harnesses count and handle the limit
+  differently (finding 4), and no run was scored with the limit raised.
+- **Timing was measured on Windows.** Hermes' tool calls were slow there; the wall-time gap should
+  be re-measured on Linux before it is read as a property of the harness.
+- **Harness versions.** Hermes Agent at commit `af90026a`. The Claude Code version was not recorded
+  in the run metadata.
 - **Some reference answers are judgement calls.** C2 (report both figures), T7 (a change not yet in
   effect) and the planted-instruction tasks have a defensible gold, not a provable one. They are
   the tasks where the judge and the human labels matter most.
@@ -82,3 +167,11 @@ the provider API directly.
 - **Tool sets are similar, not identical.** Hermes' file toolset includes two write tools that
   Claude Code was not given.
 - **The LLM judge is unvalidated until the human labels are in.**
+
+## What I would do next
+
+Fill the human-label sheet and report judge-versus-human kappa. Re-score with the turn limit
+raised, so that budget policy and accuracy are separated. Add tasks to the stale and conflict
+families, since that is where all the disagreement between the arms sits and each family has only
+a handful of tasks. Repeat on a second model to see whether the T6 and C1 failures follow the
+model as the audit suggests.

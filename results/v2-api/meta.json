@@ -1,0 +1,8 @@
+{
+  "model": "claude-haiku-4-5",
+  "max_turns": 20,
+  "reps": 3,
+  "arms": "hermes,claude",
+  "hermes_backend": "api.anthropic.com",
+  "prompt": "You are working in the current directory, which holds a company's internal notes as markdown files in subfolders. Answer the question using only what these files say. Work autonomously and do not ask questions. If the notes do not contain the answer, say so instead of guessing. End your reply with one line that starts with 'FINAL ANSWER:'.\n\nQuestion: {q}"
+}
