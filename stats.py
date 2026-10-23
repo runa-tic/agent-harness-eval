@@ -130,11 +130,34 @@ def main():
     if sheet.exists():
         with sheet.open(encoding="utf-8-sig", newline="") as f:
             hand = {row["id"]: row["hand"].strip() for row in csv.DictReader(f) if row.get("hand", "").strip() in ("0", "1")}
-    pairs = [(x["judge"], int(hand[h])) for x in usable
-             if (h := hashlib.sha256(("blind\0" + x["run"]).encode()).hexdigest()[:10]) in hand]
-    if pairs:
-        k = kappa([p[0] for p in pairs], [p[1] for p in pairs])
-        L.append(f"- **Judge vs human labels:** Cohen's kappa = {'n/a (no variance)' if k is None else f'{k:.2f}'} over {len(pairs)} labelled runs.")
+    # hand_adjudicated.csv: second-look verdicts on the first-pass disagreements. Only disagreements
+    # were reviewed, which can only raise agreement, so the first-pass figure stays the headline.
+    review = {}
+    adj = d / "hand_adjudicated.csv"
+    if adj.exists():
+        with adj.open(encoding="utf-8-sig", newline="") as f:
+            review = {row["id"]: row for row in csv.DictReader(f)}
+
+    def human_vs_judge(labels, title):
+        rows = [(x, int(labels[h])) for x in usable
+                if (h := hashlib.sha256(("blind\0" + x["run"]).encode()).hexdigest()[:10]) in labels]
+        k = kappa([x["judge"] for x, _ in rows], [v for _, v in rows])
+        agree = sum(1 for x, v in rows if x["judge"] == v)
+        L.append(f"- **{title}:** Cohen's kappa = {'n/a (no variance)' if k is None else f'{k:.2f}'} over {len(rows)} labelled runs; "
+                 f"they agree on {agree} of {len(rows)}.")
+        for x, v in rows:
+            if v != x["judge"]:
+                L.append(f"  - `{x['run']}`: judge {x['judge']}, human {v}. Judge: {x['reason']}")
+
+    if hand:
+        human_vs_judge(hand, "Judge vs human labels, first pass")
+        if review:
+            final = {**hand, **{i: r["hand"].strip() for i, r in review.items() if i in hand}}
+            human_vs_judge(final, f"Judge vs human labels, after a second look at {len(review)} disagreements")
+            for x in usable:
+                h = hashlib.sha256(("blind\0" + x["run"]).encode()).hexdigest()[:10]
+                if h in review and h in hand:
+                    L.append(f"  - review `{x['run']}`: {review[h]['first_pass']} -> {review[h]['hand']}, {review[h]['note']}")
     else:
         L.append("- **Judge vs human labels:** not available; `hand_labels.csv` has no labels filled in yet.")
 

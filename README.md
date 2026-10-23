@@ -64,9 +64,27 @@ The LLM judge (a different, larger model, blind to the arm) and the programmatic
 - `hermes:C2:3` mentions both figures but commits to one. The check passed it; the judge did not.
 
 Scoring those five the strict way gives 135/150 and 132/150, which is inside the same interval.
-**Human labels are not in yet**: `results/v2-api/hand_labels.csv` is a blind, shuffled sheet of
-all 300 answers, and `stats.py` reports judge-versus-human kappa once it is filled. Until then
-the judge is checked only against the programmatic grader.
+
+**Against a human.** I labelled a random 100 of the 300 answers by hand, blind to arm and to both
+graders. The sheet `results/v2-api/hand_labels.csv` is in a seeded random order, and the sample is
+its first 100 rows: 9 of them are judge-incorrect, against 31 of 300 overall. On the first pass
+the judge and I agree on 95 of 100, **Cohen's kappa 0.71**. Kappa sits well below the raw
+agreement because only about one answer in ten is wrong, so a handful of disagreements weighs a
+lot.
+
+I then took a second look at the five disagreements. Four were my errors, not the judge's: two
+L4 answers that list exactly the reference names, a J1 answer that gives the reference date
+(I had passed a near-identical answer later in the sheet), and a C2 answer that commits to 24
+alone. After that review
+agreement is 99 of 100, kappa 0.94. The one that remains is `hermes:C2:3`, which names both
+figures but leans on one; the judge fails it and I pass it, and it is the same case the
+programmatic check splits on above. Because only the disagreements were reviewed, the second
+figure can only go up, so the first pass is the honest headline. The reviews and their reasons
+are in `results/v2-api/hand_adjudicated.csv`; `hand_labels.csv` keeps the first pass as entered.
+
+What this says about the judge: on this sample it was more consistent with the written rule than
+I was on a first pass, and where it and a human still differ, the cause is a reference answer
+(C2) that leaves room for judgement.
 
 ## Design
 
@@ -90,8 +108,8 @@ the judge is checked only against the programmatic grader.
   task list it was given, so old runs are always graded against their own questions.
 - **Two graders.** A programmatic check on the text after `FINAL ANSWER:` and an LLM judge that is
   a different model from the one under test and never sees the arm. Their agreement is reported as
-  Cohen's kappa. `judge.py` also writes a blind, shuffled sheet for human labels; once filled,
-  `stats.py` reports judge-vs-human kappa.
+  Cohen's kappa. `judge.py` also writes a blind, shuffled sheet for human labels, and `stats.py`
+  reports judge-vs-human kappa over whatever part of it is filled, first pass and after review.
 - **Intervals.** Per-arm success with a Wilson interval over runs (readable, but too narrow because
   repeats of a task are correlated), and the arm difference with a bootstrap over tasks, which is
   the unit actually sampled.
@@ -130,7 +148,7 @@ name in file paths, session and message identifiers, and thinking signatures hav
 python corpus_gen.py                      # corpus/ and tasks.json
 python run.py --label pilot --reps 3      # results/pilot/runs.jsonl (resumable)
 python judge.py --label pilot             # grades + hand_labels.csv
-python label.py --label pilot             # optional: fill hand_labels.csv in the terminal
+python label.py --label pilot --first 100 # optional: hand-label a random 100 in the terminal
 python stats.py --label pilot             # report.md
 ```
 
@@ -166,11 +184,14 @@ the provider API directly.
   `-shim` run is a pipeline check, not a result about Hermes.
 - **Tool sets are similar, not identical.** Hermes' file toolset includes two write tools that
   Claude Code was not given.
-- **The LLM judge is unvalidated until the human labels are in.**
+- **The judge is validated on 100 runs, by one labeller.** One person labelled them, so there is
+  no human-human agreement to compare the judge with, and nine wrong answers in the sample is few:
+  one more or one fewer disagreement moves kappa by several points.
 
 ## What I would do next
 
-Fill the human-label sheet and report judge-versus-human kappa. Re-score with the turn limit
+Label the other 200 answers and add a second labeller, so the judge can be compared with
+human-human agreement rather than with one person. Re-score with the turn limit
 raised, so that budget policy and accuracy are separated. Add tasks to the stale and conflict
 families, since that is where all the disagreement between the arms sits and each family has only
 a handful of tasks. Repeat on a second model to see whether the T6 and C1 failures follow the

@@ -8,7 +8,10 @@ Use the same rule the LLM judge was given: correct only if the final conclusion 
 fact as the reference; wrong, missing, hedged between a right and a wrong value, or inventing
 something the reference says is not recorded counts as incorrect.
 
-Usage: python label.py --label v2-api
+The sheet is already in a seeded random order (judge.py), so --first N labels a fixed random
+sample of N runs instead of the whole sheet.
+
+Usage: python label.py --label v2-api [--first 100]
 Keys:  1 correct, 0 incorrect, s skip for now, b go back one, q save and quit
 """
 import argparse, csv, sys, textwrap
@@ -32,14 +35,16 @@ def wrap(text, width=100):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--label", required=True)
+    ap.add_argument("--first", type=int, default=None, help="label only the first N rows of the shuffled sheet")
     a = ap.parse_args()
     for stream in (sys.stdout, sys.stderr):
         stream.reconfigure(encoding="utf-8", errors="replace")
     sheet = ROOT / "results" / a.label / "hand_labels.csv"
     with sheet.open(encoding="utf-8-sig", newline="") as f:
         rows = list(csv.DictReader(f))
-    todo = [i for i, r in enumerate(rows) if r.get("hand", "").strip() not in ("0", "1")]
-    print(f"{len(rows) - len(todo)} of {len(rows)} already labelled.")
+    scope = rows[:a.first] if a.first else rows
+    todo = [i for i, r in enumerate(scope) if r.get("hand", "").strip() not in ("0", "1")]
+    print(f"{len(scope) - len(todo)} of {len(scope)} already labelled.")
     pos = 0
     while 0 <= pos < len(todo):
         r = rows[todo[pos]]
@@ -60,8 +65,8 @@ def main():
         elif k == "q":
             break
     save(sheet, rows)
-    left = sum(1 for r in rows if r.get("hand", "").strip() not in ("0", "1"))
-    print(f"\nSaved. {len(rows) - left} of {len(rows)} labelled, {left} left.")
+    left = sum(1 for r in scope if r.get("hand", "").strip() not in ("0", "1"))
+    print(f"\nSaved. {len(scope) - left} of {len(scope)} labelled, {left} left.")
 
 
 if __name__ == "__main__":
