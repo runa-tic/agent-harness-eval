@@ -27,17 +27,25 @@ The equal totals hide different failures. What the traces show:
    (rota that stops before the date asked); Claude Code wins T3 (a chain of three changes) and C2
    (two pages that disagree with no precedence rule). The other six are single-repeat misses, five
    of them on the Hermes side, which is where its lower consistency comes from.
-2. **The first move differs, and it decides T2.** Claude Code opened with a file listing in 142 of
-   150 runs and ran no content search at all in 69. Hermes opened with `search_files` in all 150.
-   On T2 Claude Code listed the files, read `runbooks/on-call.md`, and answered from it in two
-   tool calls, three times out of three. Hermes searched the contents for "on-call", which also
-   returned the meeting note that overrides the runbook, and was right three times out of three.
-   Searching first is not a general advantage: on T3 Hermes read the policy page and stopped in
-   two of three runs, while Claude Code read the later notes every time.
-3. **The two shared failures look like the model, not the harness.** On T6 (ownership handed over
-   on a person's page) and C1 (a catalogue that states it is authoritative) both arms read the
+2. **Both arms usually start with a file listing; what differs is what their searches return.**
+   The first call was a listing in 142 of 150 Claude Code runs (`Glob`) and in 101 of 150 Hermes
+   runs (`search_files` with `target: files`; 37 of those listings came back empty). Hermes's
+   content search returns the matching lines, and it ran one in 119 of 150 runs. Claude Code's
+   `Grep` returns only file names unless it asks for lines: it searched contents in 81 runs, saw
+   matching lines in 29, and ran no content search at all in 69. On T2 Claude Code listed the
+   files in two runs and grepped for "on-call" in one, getting seven file names back; either way
+   the path of the meeting note that overrides the runbook was in front of it, and all three
+   times it read only `runbooks/on-call.md` and answered from it in two tool calls. Hermes's
+   content search returned the meeting note's line about the shift change in all three runs (in
+   one, after two listing attempts that came back empty), and it was right three times out of
+   three. This is a reading of three traces per arm, not a tested cause, and searching for lines
+   is not a general advantage: on T3 Hermes read the policy page and stopped in two of three
+   runs, while Claude Code read the later notes every time.
+3. **The two shared failures are at least partly the model.** On T6 (ownership handed over on a
+   person's page) and C1 (a catalogue that states it is authoritative) both arms read the
    service page and stopped, 0/3 each. In the gold audit, the same Claude Code harness with a
-   larger model answered both correctly.
+   larger model answered both correctly, one run each. Hermes was not run on the larger model, so
+   this shows the model can change the outcome, not that the harness plays no part.
 4. **The harnesses behave differently at the turn limit.** Both were capped at 20 turns. Hermes
    reached the cap in 4 runs, exited with code 1, and still returned a final answer in all four;
    three were correct. Claude Code reached it in 2 runs and returned an empty result both times.
