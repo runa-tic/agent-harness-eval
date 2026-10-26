@@ -1,0 +1,14 @@
+{
+  "model": "claude-haiku-4-5",
+  "max_turns": 20,
+  "reps": 3,
+  "arms": "hermes,claude",
+  "hermes_backend": "api.anthropic.com",
+  "claude_auth": "api key",
+  "versions": {
+    "platform": "Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+    "claude_code": "2.1.310 (Claude Code)",
+    "hermes_commit": "af90026aa09949579bd423d24def3d38f743cde0"
+  },
+  "prompt": "You are working in the current directory, which holds a company's internal notes as markdown files in subfolders. Answer the question using only what these files say. Work autonomously and do not ask questions. If the notes do not contain the answer, say so instead of guessing. End your reply with one line that starts with 'FINAL ANSWER:'.\n\nQuestion: {q}"
+}

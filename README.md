@@ -20,13 +20,32 @@ tasks: -6.7 to +7.3). With 50 tasks the interval is about 7 points either side, 
 smaller than that would not show up here. The full tables are in
 [`results/v2-api/report.md`](results/v2-api/report.md).
 
+**Re-run on Linux.** I repeated all 300 runs on Linux (WSL2), with both arms on an API key and
+the harness versions recorded ([`results/v3-wsl/report.md`](results/v3-wsl/report.md)).
+
+| Arm | Judge correct | Wilson 95% (runs) | Tasks with the same verdict on all 3 repeats | Median wall time | Median tool calls |
+|---|---|---|---|---|---|
+| Claude Code | 140/150 = 93% | 88% to 96% | 49 of 50 | 17 s | 4 |
+| Hermes Agent | 134/150 = 89% | 83% to 93% | 38 of 50 | 19 s | 7 |
+
+The arms are again not distinguishable on accuracy: Claude Code minus Hermes is **+4.0 points**
+(95% bootstrap over tasks: -1.3 to +9.3). Two things did change. Hermes' wall time fell from
+43 s to 19 s, so most of the Windows gap was the platform (finding 5). And the per-task
+differences did not repeat: none of the five tasks whose majority verdict flipped between the
+arms on Windows flipped on Linux, and the one task that flipped on Linux (T6) was 0/3 on both
+arms on Windows. With three repeats a per-task win is not stable evidence, and the per-task
+claims below should be read with that in mind. The findings are from the Windows run unless they
+say otherwise.
+
 The equal totals hide different failures. What the traces show:
 
 1. **37 tasks are solved 3/3 by both arms, 2 are failed 0/3 by both, and 11 differ.** On five of
    the 11 the majority verdict flips: Hermes wins T2 (stale runbook), D2 (renamed service) and U6
    (rota that stops before the date asked); Claude Code wins T3 (a chain of three changes) and C2
    (two pages that disagree with no precedence rule). The other six are single-repeat misses, five
-   of them on the Hermes side, which is where its lower consistency comes from.
+   of them on the Hermes side, which is where its lower consistency comes from. On Linux the
+   split is 36, 1 (C1) and 13: one majority flip (T6, to Hermes) and twelve tasks where the arms
+   share a majority verdict but not every repeat, ten of them with the miss on the Hermes side.
 2. **Both arms usually start with a file listing; what differs is what their searches return.**
    The first call was a listing in 142 of 150 Claude Code runs (`Glob`) and in 101 of 150 Hermes
    runs (`search_files` with `target: files`; 37 of those listings came back empty). Hermes's
@@ -41,23 +60,38 @@ The equal totals hide different failures. What the traces show:
    three. This is a reading of three traces per arm, not a tested cause, and searching for lines
    is not a general advantage: on T3 Hermes read the policy page and stopped in two of three
    runs, while Claude Code read the later notes every time.
+   The Linux run tests this reading on T2, and it holds trace by trace though not as a score:
+   Hermes went 1/3. In the run it got right it searched contents for "on-call|shift" and the
+   meeting note's line came back; in the two it got wrong it listed the files, read only the
+   runbook and gave the stale answer, as Claude Code did in all three of its runs. Across both
+   platforms Hermes saw the overriding line in 4 of 6 runs and was right in all 4, and missed it
+   in 2 and was wrong in both; Claude Code never saw it and was wrong in 6 of 6. The Linux counts
+   for the rest of this finding are similar: a listing first in 149 of 150 Claude Code runs and
+   106 of 150 Hermes runs (59 of them empty, from the same regex-style patterns such as
+   `.*\.md$`), a Hermes content search in 132 runs, and a Claude Code `Grep` in 80, with matching
+   lines in 44.
 3. **The two shared failures are at least partly the model.** On T6 (ownership handed over on a
    person's page) and C1 (a catalogue that states it is authoritative) both arms read the
    service page and stopped, 0/3 each. In the gold audit, the same Claude Code harness with a
    larger model answered both correctly, one run each. Hermes was not run on the larger model, so
-   this shows the model can change the outcome, not that the harness plays no part.
+   this shows the model can change the outcome, not that the harness plays no part. On Linux
+   Hermes answered T6 correctly twice, both times after a content search for the owner led it to
+   the previous owner's own page, while Claude Code stayed at 0/3; C1 stayed at 0/3 on both arms.
 4. **The harnesses behave differently at the turn limit.** Both were capped at 20 turns. Hermes
    reached the cap in 4 runs, exited with code 1, and still returned a final answer in all four;
    three were correct. Claude Code reached it in 2 runs and returned an empty result both times.
    Those two empty results are the whole of Claude Code's deficit on U6, so part of what this
-   eval scores as accuracy is a budget policy.
-5. **Hermes is slower here, and about half of that is tool execution.** Its tool calls took a
-   median 3.7 s per search and 2.3 s per file read, 49% of wall time in the median run, plus about
-   4 s outside the agent loop. The runs were made on Windows, so this is a measurement of this
-   setup and not of Hermes in general.
+   eval scores as accuracy is a budget policy. On Linux it was 3 Hermes runs (2 correct) and 1
+   Claude Code run, again empty.
+5. **Hermes was slower on Windows, and the Linux run shows that was the platform.** On Windows
+   its tool calls took a median 3.7 s per search and 2.3 s per file read, 49% of wall time in the
+   median run, plus about 4 s outside the agent loop. On Linux the same calls took 65 ms and
+   15 ms, 2% of wall time, with about 3 s outside the loop, and the median run took 19 s against
+   Claude Code's 17 s.
 6. **Cost per run is about the same.** Claude Code reported a median of $0.024 per run ($4.59 for
    150). Hermes reports token counts but no price; at list prices its runs come to a median of
-   $0.019 to $0.023 ($4.07 to $5.35 in total), depending on which cache-write rate applies.
+   $0.019 to $0.023 ($4.07 to $5.35 in total), depending on which cache-write rate applies. On
+   Linux: Claude Code $0.019 ($3.70), Hermes $0.021 to $0.027 ($4.58 to $5.97).
 7. **Neither arm obeyed text addressed to an AI reader.** J1 and J2 were 6/6 on both.
 
 ### How far to trust the grading
@@ -141,7 +175,8 @@ I was on a first pass, and where it and a human still differ, the cause is a ref
 
 | Label | What it is |
 |---|---|
-| `results/v2-api` | The result above: 50 tasks, 3 repeats, both arms, provider API |
+| `results/v2-api` | The result above: 50 tasks, 3 repeats, both arms, provider API, on Windows |
+| `results/v3-wsl` | The same on Linux (WSL2), both arms on an API key, harness versions in `meta.json` |
 | `results/v2-audit-sonnet` | Gold audit: Claude Code arm with a larger model, one repeat. 49/50 by the judge, 50/50 by the programmatic check |
 | `results/v2-calib-haiku` | Difficulty check before the head-to-head: Claude Code arm, one repeat, 45/50 |
 | `results/v2-smoke-api` | One task, one repeat per arm, to prove the provider API path before the full run |
@@ -163,7 +198,8 @@ python stats.py --label pilot             # report.md
 `run.py` expects a Hermes dev checkout with its runtime next to this folder (`../hermes-eval`, or
 set `HERMES_EVAL_DIR`), and the `claude` CLI on PATH. By default the Hermes arm sends model calls
 to `http://127.0.0.1:8765`; pass `--hermes-base-url "" --hermes-key-env ANTHROPIC_API_KEY` to use
-the provider API directly.
+the provider API directly. On a host where the `claude` CLI is not logged in, add
+`--claude-key-env ANTHROPIC_API_KEY` to give the Claude Code arm the same key.
 
 ## Known limits
 
@@ -176,10 +212,14 @@ the provider API directly.
   but no code, terminal or write tasks, which is most of what either harness is built for.
 - **The turn limit is part of the score.** The two harnesses count and handle the limit
   differently (finding 4), and no run was scored with the limit raised.
-- **Timing was measured on Windows.** Hermes' tool calls were slow there; the wall-time gap should
-  be re-measured on Linux before it is read as a property of the harness.
-- **Harness versions.** Hermes Agent at commit `af90026a`. The Claude Code version was not recorded
-  in the run metadata.
+- **Timing depends on the platform.** Hermes' searches were about 57 times slower on Windows than
+  on Linux (median 3.7 s against 65 ms) and its file reads about 150 times; read the Linux run
+  for speed.
+- **Harness versions and auth.** Hermes Agent at commit `af90026a` in both runs. The Claude Code
+  version was not recorded for the Windows run; the Linux run used 2.1.310. On Windows the Claude
+  Code arm ran on its CLI login, on Linux on the same API key as Hermes.
+- **The Linux grades were not hand-checked.** The human labels and kappa below are for the Windows
+  run. On Linux the judge and the programmatic check agree on 292 of 300, kappa 0.83.
 - **Some reference answers are judgement calls.** C2 (report both figures), T7 (a change not yet in
   effect) and the planted-instruction tasks have a defensible gold, not a provable one. They are
   the tasks where the judge and the human labels matter most.
