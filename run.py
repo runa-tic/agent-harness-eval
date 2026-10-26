@@ -12,7 +12,7 @@ interrupted sweep resumes.
 
 Usage: python run.py --label pilot --reps 3 [--arms hermes,claude] [--tasks R1,T1] [--model claude-haiku-4-5]
 """
-import argparse, json, os, re, shutil, subprocess, sys, tempfile, time, uuid
+import argparse, json, os, platform, re, shutil, subprocess, sys, tempfile, time, uuid
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -20,6 +20,9 @@ HERMES_EVAL = Path(os.environ.get("HERMES_EVAL_DIR", ROOT.parent / "hermes-eval"
 HERMES_REPO = HERMES_EVAL / "hermes-agent"
 HERMES_RUNTIME = HERMES_EVAL / "runtime"
 TIMEOUT = 900
+# Claude Code normally runs on the logged-in CLI account; set from --claude-key-env where there is
+# no login (a fresh Linux box), so the arm calls the provider API with that key instead.
+CLAUDE_KEY = None
 
 PROMPT = (
     "You are working in the current directory, which holds a company's internal notes as markdown "
@@ -143,7 +146,8 @@ def run_claude(q, model, max_turns, backend):
     t0 = time.monotonic()
     rec = {"tool_calls": [], "model_calls": 0, "tokens": {}, "error": None, "answer": ""}
     try:
-        p = subprocess.run(argv, cwd=str(ws), env=child_env({"ENABLE_CLAUDEAI_MCP_SERVERS": "false", "CLAUDE_BRAIN_NO_HOOK": "1"}),
+        p = subprocess.run(argv, cwd=str(ws), env=child_env({"ENABLE_CLAUDEAI_MCP_SERVERS": "false", "CLAUDE_BRAIN_NO_HOOK": "1",
+                                            **({"ANTHROPIC_API_KEY": CLAUDE_KEY} if CLAUDE_KEY else {})}),
                            input=PROMPT.format(q=q), capture_output=True, text=True, encoding="utf-8",
                            errors="replace", timeout=TIMEOUT)
         rec["exit"] = p.returncode
@@ -176,6 +180,17 @@ def run_claude(q, model, max_turns, backend):
     return rec
 
 
+def versions():
+    """What produced the runs, recorded beside them: the v2 runs did not keep the Claude Code version."""
+    def out(argv, cwd=None):
+        try:
+            return subprocess.run(argv, cwd=cwd, capture_output=True, text=True, timeout=60).stdout.strip()
+        except (OSError, subprocess.SubprocessError):
+            return None
+    return {"platform": platform.platform(), "claude_code": out([shutil.which("claude") or "claude", "--version"]),
+            "hermes_commit": out(["git", "rev-parse", "HEAD"], cwd=HERMES_REPO)}
+
+
 ARMS = {"hermes": run_hermes, "claude": run_claude}
 
 
@@ -190,11 +205,15 @@ def main():
     ap.add_argument("--hermes-base-url", default="http://127.0.0.1:8765",
                     help="where Hermes sends model calls; empty string = the real Anthropic API (needs --hermes-key-env)")
     ap.add_argument("--hermes-key-env", default="", help="name of the env var holding a real API key for the Hermes arm")
+    ap.add_argument("--claude-key-env", default="",
+                    help="name of the env var holding an API key for the Claude Code arm; empty = the CLI's own login")
     a = ap.parse_args()
 
     tasks = json.loads((ROOT / "tasks.json").read_text(encoding="utf-8"))
     if a.tasks:
         tasks = [t for t in tasks if t["id"] in a.tasks.split(",")]
+    global CLAUDE_KEY
+    CLAUDE_KEY = os.environ[a.claude_key_env] if a.claude_key_env else None
     backend = {"ANTHROPIC_API_KEY": os.environ[a.hermes_key_env] if a.hermes_key_env else "shim-placeholder"}
     if a.hermes_base_url:
         backend["ANTHROPIC_BASE_URL"] = a.hermes_base_url
@@ -215,7 +234,9 @@ def main():
     snap.write_text(all_tasks, encoding="utf-8")
     (out_dir / "meta.json").write_text(json.dumps({
         "model": a.model, "max_turns": a.max_turns, "reps": a.reps, "arms": a.arms,
-        "hermes_backend": a.hermes_base_url or "api.anthropic.com", "prompt": PROMPT}, indent=2), encoding="utf-8")
+        "hermes_backend": a.hermes_base_url or "api.anthropic.com",
+        "claude_auth": "api key" if CLAUDE_KEY else "cli login", "versions": versions(), "prompt": PROMPT},
+        indent=2), encoding="utf-8")
 
     for rep in range(1, a.reps + 1):
         for task in tasks:
